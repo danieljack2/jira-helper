@@ -31,9 +31,9 @@ pip install -r requirements.txt
 ### Configuration
 Create a `.env` file in the root directory with the following variables:
 
-JIRA_URL=https://your-domain.atlassian.net
-JIRA_EMAIL=your-email@domain.com
-JIRA_API_TOKEN=your-api-token
+JIRA_SERVER=https://your-domain.atlassian.net
+JIRA_USERNAME=your-email@domain.com
+JIRA_PASSWORD=your-api-token
 
 
 To get your API token:
