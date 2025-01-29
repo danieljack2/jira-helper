@@ -6,6 +6,8 @@ import jira_functions as jira_functions
 issues = jira_functions.get_my_issue_worklogs()
 
 def main():
+    st.set_page_config(layout="wide")
+    
     # Initialize session state for week offset if it doesn't exist
     if 'week_offset' not in st.session_state:
         st.session_state.week_offset = 0
