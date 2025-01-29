@@ -50,7 +50,7 @@ def format_issues(issueList: list):
 
     for issue in issueList:
         # Get worklogs for each issue
-        worklogList = issue.fields.worklog.worklogs
+        worklogList = jira.worklogs(issue.key)
         worklogs = []
             
         for worklog in worklogList:
