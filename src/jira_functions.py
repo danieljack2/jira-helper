@@ -41,7 +41,7 @@ def get_my_issue_worklogs():
 #     "parent": "SSEDXPD-6321",
 #     "worklogs": {
 #                   "worklogId": "1234567890",
-#                   "created": "2025-01-24T14:11:31.220+1000",
+#                   "started": "2025-01-24T14:11:31.220+1000",
 #                   "timeSpentSeconds": 10800,
 #               }
 # }]
@@ -56,7 +56,7 @@ def format_issues(issueList: list):
         for worklog in worklogList:
             worklogs.append({
                 "worklogId": worklog.id,
-                "created": worklog.created,
+                "started": worklog.started,
                 "timeSpentSeconds": worklog.timeSpentSeconds
                 })
         

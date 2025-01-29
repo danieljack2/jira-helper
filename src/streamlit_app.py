@@ -7,7 +7,7 @@ issues = jira_functions.get_my_issue_worklogs()
 
 def main():
     st.set_page_config(layout="wide")
-    
+
     # Initialize session state for week offset if it doesn't exist
     if 'week_offset' not in st.session_state:
         st.session_state.week_offset = 0
@@ -41,7 +41,7 @@ def main():
             row[date] = 0
             
         for worklog in issue['worklogs']:
-            worklog_date = datetime.strptime(worklog['created'].split('.')[0], '%Y-%m-%dT%H:%M:%S').strftime('%Y-%m-%d')        
+            worklog_date = datetime.strptime(worklog['started'].split('.')[0], '%Y-%m-%dT%H:%M:%S').strftime('%Y-%m-%d')        
             if worklog_date in dates:
                 row[worklog_date] += worklog['timeSpentSeconds'] / 3600
                 
@@ -81,7 +81,7 @@ def print_issue_list(df, dates):
         
         # Fill in logged hours
         for worklog in issue['worklogs']:
-            worklog_date = datetime.strptime(worklog['created'].split('.')[0], '%Y-%m-%dT%H:%M:%S').strftime('%Y-%m-%d')        
+            worklog_date = datetime.strptime(worklog['started'].split('.')[0], '%Y-%m-%dT%H:%M:%S').strftime('%Y-%m-%d')        
             if worklog_date in dates:
                 new_row[worklog_date] += worklog['timeSpentSeconds'] / 3600
                 
