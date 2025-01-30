@@ -55,6 +55,7 @@ def print_page(df, dates, data):
     print_daily_totals(df, dates)
     print_issue_list(df, dates)
     add_hours_form(data, dates)
+    print_issues_worked_on_today(df)
 
 def print_issue_list(df, dates):
     # Create an empty DataFrame with the required columns
@@ -111,5 +112,11 @@ def add_hours_form(data, dates):
         issue_key = selected_issue.split(" - ")[0]
         st.success(f"Logged {hours} hours for {issue_key} on {selected_date}")
         jira_functions.add_time(issue_key, f"{hours}h")
+
+def print_issues_worked_on_today(df):
+    st.subheader("Issues worked on this week")
+    today = datetime.now().strftime('%Y-%m-%d')
+    issues_today = df[df[today] > 0]
+    st.dataframe(issues_today, hide_index=True)
 
 main()
