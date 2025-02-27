@@ -53,9 +53,10 @@ def main():
 def print_page(df, dates, data):
     st.title("Jira Worklog Dashboard")
     print_daily_totals(df, dates)
+    print_issues_worked_on_today(df)
     print_issue_list(df, dates)
     add_hours_form(data, dates)
-    print_issues_worked_on_today(df)
+    
 
 def print_issue_list(df, dates):
     # Create an empty DataFrame with the required columns
@@ -115,8 +116,18 @@ def add_hours_form(data, dates):
 
 def print_issues_worked_on_today(df):
     st.subheader("Issues worked on this week")
-    today = datetime.now().strftime('%Y-%m-%d')
-    issues_today = df[df[today] > 0]
-    st.dataframe(issues_today, hide_index=True)
+    cols = st.columns(5)
+    
+    for i, date in enumerate(df.columns[1:]):  # Skip 'Issue' column
+        with cols[i]:
+            st.write(f"**{date}**")
+            issues_today = df[df[date] > 0].copy()
+            for _, row in issues_today.iterrows():
+                issue_parts = row['Issue'].split(' - ')
+                key = issue_parts[0]
+                summary = ' - '.join(issue_parts[1:])
+                hours = row[date]
+                st.write(f"{key} - {summary} ({hours:.1f}h)")
 
+# Runs main program
 main()
