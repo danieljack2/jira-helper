@@ -31,7 +31,7 @@ def get_my_issue_worklogs():
 
     issueList = jira_search(jql)
 
-    return format_issues(issueList)
+    return format_issues(issueList, current_user)
     
 #We want to prepare an object that looks like this:
 # [{
@@ -45,7 +45,7 @@ def get_my_issue_worklogs():
 #                   "timeSpentSeconds": 10800,
 #               }
 # }]
-def format_issues(issueList: list):
+def format_issues(issueList: list, current_user: dict):
     issues = []
 
     for issue in issueList:
@@ -54,11 +54,12 @@ def format_issues(issueList: list):
         worklogs = []
             
         for worklog in worklogList:
-            worklogs.append({
-                "worklogId": worklog.id,
-                "started": worklog.started,
-                "timeSpentSeconds": worklog.timeSpentSeconds
-                })
+            if str(worklog.author) == str(current_user["displayName"]):
+                worklogs.append({
+                    "worklogId": worklog.id,
+                    "started": worklog.started,
+                    "timeSpentSeconds": worklog.timeSpentSeconds
+                    })
         
         # Get parent task if it exists
         parent = None
