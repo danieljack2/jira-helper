@@ -44,10 +44,14 @@ To get your API token:
 ### Running the Application
 Execute the following command in your terminal:
 
+```bash
 streamlit run src/streamlit_app.py
+```
 
 
 The application will open in your default web browser at `http://localhost:8501`
+
+Add `--server.headless true` to the command if you still have the app open in an old tab, and don't want to auto-open a new tab.
 
 ## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
